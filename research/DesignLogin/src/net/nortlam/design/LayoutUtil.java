@@ -1,6 +1,7 @@
 package net.nortlam.design;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,13 +18,13 @@ public class LayoutUtil {
     
     public static final int DEFAULT_SPACE_BETWEEN_COMPONENTS = 5;
 
-    public static JPanel layoutButtons(JComponent[] components) {
+    public static JPanel layoutButtons(Component ... components) {
         JPanel panel = new JPanel();
-        GridLayout layout = new GridLayout(0, components.length, 0, 
-                                            DEFAULT_SPACE_BETWEEN_COMPONENTS);
+        GridLayout layout = new GridLayout(1, components.length,  
+                                            DEFAULT_SPACE_BETWEEN_COMPONENTS, 0);
         panel.setLayout(layout);
         
-        for(JComponent scan: components) panel.add(scan);
+        for(Component scan: components) panel.add(scan);
         
         return panel;
     }
@@ -78,15 +79,19 @@ public class LayoutUtil {
         panel.setLayout(layout);
         
         GridBagConstraints gc = new GridBagConstraints();
-        gc.gridx = 0; gc.gridy = 0; gc.gridwidth = 1; gc.gridheight = 1;
-        gc.anchor = GridBagConstraints.NORTH; gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.weightx = 1.0; gc.weighty = 1.0;
-        layout.setConstraints(north, gc); panel.add(north);
+        if(north != null) {
+            gc.gridx = 0; gc.gridy = 0; gc.gridwidth = 1; gc.gridheight = 1;
+            gc.anchor = GridBagConstraints.NORTH; gc.fill = GridBagConstraints.HORIZONTAL;
+            gc.weightx = 1.0; gc.weighty = 1.0;
+            layout.setConstraints(north, gc); panel.add(north);
+        }
         
-        gc.gridx = 0; gc.gridy = 1; gc.gridwidth = 1; gc.gridheight = 1;
-        gc.anchor = GridBagConstraints.SOUTHEAST; gc.fill = GridBagConstraints.NONE;
-        gc.weightx = 1.0; gc.weighty = 1.0;
-        layout.setConstraints(southeast, gc); panel.add(southeast);
+        if(southeast != null) {
+            gc.gridx = 0; gc.gridy = 1; gc.gridwidth = 1; gc.gridheight = 1;
+            gc.anchor = GridBagConstraints.SOUTHEAST; gc.fill = GridBagConstraints.NONE;
+            gc.weightx = 1.0; gc.weighty = 1.0;
+            layout.setConstraints(southeast, gc); panel.add(southeast);
+        }
         
         return panel;
     }
@@ -197,6 +202,24 @@ public class LayoutUtil {
             gc.anchor = GridBagConstraints.SOUTH; gc.fill = GridBagConstraints.HORIZONTAL;
             gc.weightx = 1.0; gc.weighty = 1.0;
             layout.setConstraints(south, gc); panel.add(south);
+        }
+        
+        return panel;
+    }
+    
+    public static JPanel layoutVertical(Component ... components) {
+        JPanel panel = new JPanel();
+        GridBagLayout layout = new GridBagLayout();
+        panel.setLayout(layout);
+        
+        GridBagConstraints gc = new GridBagConstraints(); 
+        for(int i=0; i < components.length; i++) {
+            gc.gridx = 0; gc.gridy = i; gc.gridwidth = 1; gc.gridheight = 1;
+            gc.anchor = GridBagConstraints.CENTER; gc.fill = GridBagConstraints.HORIZONTAL;
+            gc.weightx = 1.0; gc.weighty = 0.0;
+            if(i == components.length -1) gc.insets.bottom = 0;
+            else gc.insets.bottom = DEFAULT_SPACE_BETWEEN_COMPONENTS;
+            layout.setConstraints(components[i], gc); panel.add(components[i]);
         }
         
         return panel;

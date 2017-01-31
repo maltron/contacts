@@ -1,6 +1,8 @@
 package net.nortlam.example;
 
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,36 +14,41 @@ import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
-import static net.nortlam.design.LayoutUtil.layoutNorthwestNorthNortheastSouth;
-import static net.nortlam.design.LayoutUtil.layoutButtons;
+import net.nortlam.design.LayoutUtil;
 
 /**
  *
  * @author Mauricio "Maltron" Leal <maltron at gmail dot com> */
-public class TestNorth extends JFrame implements Serializable, ActionListener, KeyListener {
+public class TestLogin extends JFrame implements Serializable, ActionListener, KeyListener {
 
-    private static final Logger LOG = Logger.getLogger(TestNorth.class.getName());
-    
-    private JButton buttonOne, buttonTwo, buttonMiddle, buttonAlpha, buttonBravo, buttonSouth;
+    private static final Logger LOG = Logger.getLogger(TestLogin.class.getName());
+
+    private DialogLogin dialogLogin;
+    private JButton buttonLogin;
+    private JButton buttonExit;
     
     public static void main(String[] args) {
-        TestNorth app = new TestNorth();
+        TestLogin app = new TestLogin();
     }
     
-    public TestNorth() {
-        super("TestNorth");
+    public TestLogin() {
+        super("TestLogin");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch(Exception ex) {}
         
-        initComponents();
-        setContentPane(createPanel());
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                initComponents();
+                setContentPane(createPanel());
+            }
+        });
         
         addWindowListener(new WindowAdapter() {
             @Override
@@ -49,39 +56,39 @@ public class TestNorth extends JFrame implements Serializable, ActionListener, K
                 closeApplication();
             }
         });
-        
+
         setSize(800, 600);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(screenSize.width/2 - getSize().width/2,
                 screenSize.height/2 - getSize().height/2);
         setVisible(true);
     }
-    
+
     private void initComponents() {
-        buttonOne = createButton("One");
-        buttonTwo = createButton("Two");
-        buttonMiddle = createButton("Middle");
-        buttonAlpha = createButton("Alpha");
-        buttonBravo = createButton("Bravo");
-        buttonSouth = createButton("South");
+        buttonLogin = createButton("Login");
+        buttonLogin.requestFocus();
+        
+        dialogLogin = new DialogLogin(this);
+        dialogLogin.setLocationRelativeTo(this);
+        
+        buttonExit = createButton("Exit");
     }
     
     private JPanel createPanel() {
-        JPanel mainPanel = layoutNorthwestNorthNortheastSouth(
-                layoutButtons(new JComponent[] {buttonOne, buttonTwo}),
-                layoutButtons(new JComponent[] {buttonMiddle}),
-                layoutButtons(new JComponent[] {buttonAlpha, buttonBravo}),
-                layoutButtons(new JComponent[] {buttonSouth}));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-
+        JPanel mainPanel = LayoutUtil.layoutNorthSoutheast(null,
+                LayoutUtil.layoutButtons(new JButton[] {buttonLogin, buttonExit}));
+        mainPanel.setBorder(LayoutUtil.borderEmpty());
+        
         return mainPanel;
     }
     
     private void closeApplication() {
         setVisible(false);
+        dispose();
+        System.gc();
         System.exit(0);
     }
-
+    
     private JButton createButton(String label) {
         JButton button = new JButton(label);
         button.addActionListener(this);
@@ -89,12 +96,16 @@ public class TestNorth extends JFrame implements Serializable, ActionListener, K
         
         return button;
     }
-    
+
     // ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER 
     //  ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonExit) {
             closeApplication();
+        } else if(e.getSource() == buttonLogin) {
+            dialogLogin.setVisible(true);
+        }
     }
 
     // KEY LISTENER KEY LISTENER KEY LISTENER KEY LISTENER KEY LISTENER KEY LISTENER 
