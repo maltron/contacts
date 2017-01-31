@@ -40,7 +40,7 @@ public class DialogLogin extends JDialog implements ActionListener, KeyListener,
         super(owner, "Login", true);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 //        setUndecorated(true);
-//        setResizable(false);
+        setResizable(false);
         
         initComponents();
         setContentPane(createPanel());
@@ -56,6 +56,7 @@ public class DialogLogin extends JDialog implements ActionListener, KeyListener,
         
         buttonRegister = createButton("Register");
         buttonForgetPassword = createButton("Forgot Password");
+        buttonForgetPassword.setEnabled(false);
         buttonSignIn = createButton("Sign In");
         buttonSignIn.setEnabled(false);
         buttonCancel = createButton("Cancel");
@@ -150,20 +151,28 @@ public class DialogLogin extends JDialog implements ActionListener, KeyListener,
     @Override
     public void insertUpdate(DocumentEvent e) {
         buttonSignIn.setEnabled(hasUsernamePassword());
+        buttonForgetPassword.setEnabled(hasUsername());
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
         buttonSignIn.setEnabled(hasUsernamePassword());
+        buttonForgetPassword.setEnabled(hasUsername());
+        
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
         buttonSignIn.setEnabled(hasUsernamePassword());
+        buttonForgetPassword.setEnabled(hasUsername());
     }
     
     private boolean hasUsernamePassword() {
-        return textUsername.getText().length() > 0 &&
+        return hasUsername() &&
                 password.getPassword().length > 0;
+    }
+    
+    private boolean hasUsername() {
+        return textUsername.getText().length() > 0;
     }
 }
