@@ -27,8 +27,6 @@ import static net.nortlam.design.LayoutUtil.*;
  * @author Mauricio "Maltron" Leal <maltron at gmail dot com> */
 public class DialogLogin extends JDialog implements ActionListener, KeyListener, DocumentListener {
 
-    private static final Logger LOG = Logger.getLogger(DialogLogin.class.getName());
-
     private JComboBox comboLanguages;
     private JLabel labelError;
     private JLabel labelUsername, labelPassword;

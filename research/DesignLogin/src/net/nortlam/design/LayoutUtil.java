@@ -31,7 +31,7 @@ public class LayoutUtil {
     
     /**
      * It's important the length of both labels and texts match */
-    public static JPanel layoutLabelText(JComponent[] labels, JComponent[] texts) {
+    public static JPanel layoutLabelText(Component[] labels, Component[] texts) {
         JPanel panel = new JPanel();
         GridBagLayout layout = new GridBagLayout();
         panel.setLayout(layout);
