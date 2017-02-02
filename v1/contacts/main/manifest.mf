@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: net.nortlam.contacts
+OpenIDE-Module-Layer: net/nortlam/contacts/layer.xml
+OpenIDE-Module-Localizing-Bundle: net/nortlam/contacts/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
