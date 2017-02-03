@@ -1,3 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
-<filesystem/>
+<filesystem>
+
+    <folder name="Actions">
+        <folder name="Window">
+            <file name="net-nortlam-contacts-ContactsTopComponent.instance">
+                <!--net.nortlam.contacts.ContactsTopComponent-->
+                <attr methodvalue="org.openide.windows.TopComponent.openAction" name="instanceCreate"/>
+                <attr name="component" newvalue="net.nortlam.contacts.ContactsTopComponent"/>
+                <attr name="preferredID" stringvalue="ContactsTopComponent"/>
+                <attr bundlevalue="net.nortlam.contacts.Bundle#CTL_ContactsAction" name="displayName"/>
+            </file>
+        </folder>
+        <folder name="Load">
+            <file name="net-nortlam-module1-InfoAction.instance">
+                <attr name="delegate" newvalue="net.nortlam.module1.InfoAction"/>
+                <attr name="displayName" bundlevalue="net.nortlam.module1.Bundle#CTL_InfoAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+        </folder>
+    </folder>
+    
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="ContactsTopComponent.settings" url="ContactsTopComponentSettings.xml"/>
+        </folder>
+        <folder name="Modes">
+            <folder name="editor">
+                <file name="ContactsTopComponent.wstcref" url="ContactsTopComponentWstcref.xml"/>
+            </folder>
+        </folder>
+    </folder>
+    
+</filesystem>

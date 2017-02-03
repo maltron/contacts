@@ -3,7 +3,6 @@ package net.nortlam.contacts;
 import java.awt.BorderLayout;
 import java.util.Properties;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import net.nortlam.contacts.extra.PagingModel;
@@ -18,7 +17,7 @@ import static net.nortlam.design.LayoutUtil.*;
 /**
  *
  * @author Mauricio "Maltron" Leal <maltron at gmail dot com> */
-@ConvertAsProperties(dtd = "-//net.nortlam.contacts//ContactsTopComponent//EN", autostore = false)
+@ConvertAsProperties(dtd = "-//net.nortlam.contacts//Contacts//EN", autostore = false)
 public class ContactsTopComponent extends TopComponent {
 
     private static ContactsTopComponent instance;
@@ -33,6 +32,8 @@ public class ContactsTopComponent extends TopComponent {
     
     public ContactsTopComponent() {
         initComponents();
+        setName("Contacts");
+//        setToolTipText(Bundle.HINT_ExampleTopComponent());
         
         associateLookup(new AbstractLookup(ic));
     }
