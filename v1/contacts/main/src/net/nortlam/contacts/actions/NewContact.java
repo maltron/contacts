@@ -2,14 +2,14 @@ package net.nortlam.contacts.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.openide.util.Lookup;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Mauricio "Maltron" Leal <maltron at gmail dot com> */
-public class NewContactAction implements ActionListener {
+public class NewContact implements ActionListener {
 
-    public NewContactAction() {
+    public NewContact() {
     }
     
     // ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER ACTION LISTENER 
@@ -17,5 +17,6 @@ public class NewContactAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.printf(">>> NewContact\n");
     }
 }

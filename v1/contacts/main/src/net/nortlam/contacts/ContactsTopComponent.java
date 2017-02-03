@@ -13,6 +13,7 @@ import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;
 
 import static net.nortlam.design.LayoutUtil.*;
+import org.openide.util.NbBundle;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ContactsTopComponent extends TopComponent {
     
     public ContactsTopComponent() {
         initComponents();
-        setName("Contacts");
+        setName(NbBundle.getMessage(ContactsTopComponent.class, "Contact_LIST"));
 //        setToolTipText(Bundle.HINT_ExampleTopComponent());
         
         associateLookup(new AbstractLookup(ic));

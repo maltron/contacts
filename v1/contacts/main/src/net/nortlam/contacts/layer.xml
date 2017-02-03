@@ -2,7 +2,7 @@
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
 
-    <folder name="Actions">
+    <folder name="Contacts">
         <folder name="Window">
             <file name="net-nortlam-contacts-ContactsTopComponent.instance">
                 <!--net.nortlam.contacts.ContactsTopComponent-->
@@ -12,16 +12,85 @@
                 <attr bundlevalue="net.nortlam.contacts.Bundle#CTL_ContactsAction" name="displayName"/>
             </file>
         </folder>
-        <folder name="Load">
-            <file name="net-nortlam-module1-InfoAction.instance">
-                <attr name="delegate" newvalue="net.nortlam.module1.InfoAction"/>
-                <attr name="displayName" bundlevalue="net.nortlam.module1.Bundle#CTL_InfoAction"/>
+        <folder name="Actions">
+            <file name="net-nortlam-contacts-action-NewContact.instance">
+                <!-- net.nortlam.contacts.actions.NewContact -->
+                <attr name="displayName"    bundlevalue="net.nortlam.contacts.Bundle#Contact_NEW"/>
                 <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
-                <attr name="noIconInMenu" boolvalue="false"/>
+                <attr name="delegate"       newvalue="net.nortlam.contacts.actions.NewContact"/>
+                <attr name="iconBase"       stringvalue="net/nortlam/contacts/icons/iconNew16.png"/>
+                <attr name="noIconInMenu"   boolvalue="false"/>
+            </file>
+            <file name="net-nortlam-contacts-action-DeleteContact.instance">
+                <!-- net.nortlam.contacts.actions.DeleteContact -->
+                <!-- <attr name="delegate" newvalue="net.nortlam.visual.action.NewEntityAction"/>
+                <attr name="displayName" bundlevalue="net.nortlam.visual.action.Bundle#CTL_NewEntityAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/> -->
+                <attr name="iconBase"       stringvalue="net/nortlam/contacts/icons/iconDelete16.png"/>
+                <attr name="delegate"       methodvalue="org.openide.awt.Actions.inject"/>
+                <attr name="displayName"    bundlevalue="net.nortlam.contacts.Bundle#Contact_DELETE"/>
+                <attr name="injectable"     stringvalue="net.nortlam.contacts.actions.DeleteContact"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.context"/>
+                <attr name="noIconInMenu"   boolvalue="false"/>
+                <attr name="selectionType"  stringvalue="ANY"/>
+                <attr name="type"           stringvalue="net.nortlam.contacts.entity.Contact"/>
+            </file>
+            
+        </folder>
+    </folder>
+
+    <folder name="Toolbars">
+        <folder name="Contact">
+            <file name="net-nortlam-contacts-action-NewContact.shadow">
+                <!-- net.nortlam.contacts.actions.NewContact -->
+                <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-NewContact.instance"/>
+                <attr intvalue="0" name="position"/>
+            </file>
+            <file name="net-nortlam-contacts-action-DeleteAction.shadow">
+                <!-- net.nortlam.contacts.actions.DeleteAction -->
+                <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-DeleteContact.instance"/>
+                <attr intvalue="1" name="position"/>
             </file>
         </folder>
     </folder>
     
+    <folder name="Menu">
+        <folder name="Contact">
+            <attr name="displayName"    bundlevalue="net.nortlam.contacts.Bundle#Contact_TITLE"/>
+            <file name="net-nortlam-contacts-action-NewContact.shadow">
+                <!-- net.nortlam.contacts.actions.NewContact -->
+                <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-NewContact.instance"/>
+                <attr intvalue="0" name="position"/>
+            </file>
+            <file name="net-nortlam-contacts-action-DeleteAction.shadow">
+                <!-- net.nortlam.contacts.actions.DeleteAction -->
+                <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-DeleteContact.instance"/>
+                <attr intvalue="1" name="position"/>
+            </file>
+            <file name="Contact.Separator1.instance" url="Separator1.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                <attr name="position" intvalue="2599"/>
+            </file>
+            <file name="org-netbeans-core-actions-SystemExit.shadow">
+                <attr name="originalFile" stringvalue="Actions/System/org-netbeans-core-actions-SystemExit.instance"/>
+                <attr name="position" intvalue="2600"/>
+            </file>
+        </folder>
+    </folder>
+
+    <folder name="Shortcuts">
+        <file name="D-N.shadow">
+            <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-NewContact.instance"/>
+        </file>
+        <file name="D-X.shadow">
+            <attr name="originalFile" stringvalue="Contacts/Actions/net-nortlam-contacts-action-DeleteContact.instance"/>
+        </file>
+        <file name="D-Q.shadow">
+            <attr name="originalFile" stringvalue="Actions/System/org-netbeans-core-actions-SystemExit.instance"/>
+        </file>
+    </folder>
+            
     <folder name="Windows2">
         <folder name="Components">
             <file name="ContactsTopComponent.settings" url="ContactsTopComponentSettings.xml"/>
